@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class Optional<T>
+public sealed class Optional<T>
 {
    private readonly T value;
    public bool IsPresent { get; }
