@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public static class LinqExtension
 {
@@ -30,6 +31,19 @@ public static class LinqExtension
          {
             action(iterator.Current);
          }
+      }
+   }
+
+   public static Optional<T> FindFirst<T>(this IEnumerable<T> source)
+   {
+      using (var iterator = source.GetEnumerator())
+      {
+         bool found = iterator.MoveNext();
+         if(found)
+         {
+            return Optional<T>.OfNullable(iterator.Current);
+         }
+         return Optional<T>.Empty();
       }
    }
 }
